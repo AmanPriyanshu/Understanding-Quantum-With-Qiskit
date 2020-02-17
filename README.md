@@ -6,7 +6,7 @@ Qiskit: <https://github.com/Qiskit/qiskit>
 Can be followed according to: <https://github.com/Qiskit/qiskit#installation>
 
 ## Imports:
-```bash
+```python
  import numpy as np
  from qiskit import(
   QuantumCircuit,
