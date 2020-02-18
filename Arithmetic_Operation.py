@@ -108,3 +108,12 @@ addition_of_two_bits(0,1)	#Output: 0,1
 addition_of_two_bits(1,1)	#Output: 1,0
 
 
+def addition_of_two_4_byte(int_a, int_b):
+	
+	n = 32
+	a = QuantumRegister(1)
+	b = QuantumRegister(1)
+	c = QuantumRegister(1)
+
+
+
