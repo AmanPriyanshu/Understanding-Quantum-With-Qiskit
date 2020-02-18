@@ -83,7 +83,7 @@ and_gate(1,1)
 
 
 
-def addition_of_two_bits(a_in, b_in):
+def addition_of_two_bits(a_in, b_in):  #Half-Adder Implementation
 	# Now ADDITION is given by, Ex-Or followed by And Gate
 	a = QuantumRegister(1)
 	b = QuantumRegister(1)
@@ -96,7 +96,8 @@ def addition_of_two_bits(a_in, b_in):
 		circuit.x(b)		#Flip the qubit from 0 to 1
 	circuit.ccx(a, b, c)
 	circuit.cx(a, b)
-	circuit.measure([1, 2], out)
+	circuit.measure(b, out[0])    #Doubt: Why does value of 
+	circuit.measure(c, out[1])
 	counts = simulator(circuit, 2048)
 	print('output:',counts)
 	print(circuit_drawer(circuit))
@@ -107,13 +108,30 @@ addition_of_two_bits(1,0)   #Output: 0,1
 addition_of_two_bits(0,1)	#Output: 0,1
 addition_of_two_bits(1,1)	#Output: 1,0
 
+def half_adder(circuit, i, a, b, g, k):
+	circuit.ccx(a[i],b[i],g[k])
+	circuit.cx(a[i],b[i])
+	return circuit
 
-def addition_of_two_4_byte(int_a, int_b):
-	
-	n = 32
-	a = QuantumRegister(1)
-	b = QuantumRegister(1)
-	c = QuantumRegister(1)
+def or_gate()
 
+def addition_of_two_4_byte(a_in, b_in):
+	n = 3
+	a = QuantumRegister(n)
+	b = QuantumRegister(n)
+	c = QuantumRegister(n)
+	g = QuantumRegister(n*2)
+	out = ClassicalRegister(n+1)
+	circuit = QuantumCircuit(a, b, c, g, out)
+	for i in range(n):
+		if a_in[i] == 1:
+			circuit.x(a[i])		#Flip the qubit from 0 to 1
+	for i in range(n):
+		if b_in[i] == 1:
+			circuit.x(b[i])		#Flip the qubit from 0 to 1
+
+	for i in range(n):
+		circuit = half_adder(circuit, i, a, b, g, 2*i)
+		circuit = half_adder(circuit, i, b, c, g, 2*i+1)
 
 
