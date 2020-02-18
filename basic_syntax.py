@@ -27,13 +27,15 @@ print(circuit_drawer(circuit))
 ### Simulates the circuit, shots number of times, here = 2048
 def simulator(circuit, shots):
 	simulator = Aer.get_backend('qasm_simulator')
-	job = execute(circuit, simulator)
+	job = execute(circuit, simulator, shots=shots)
 	result = job.result()
 	counts = result.get_counts(circuit)        # Gets count of the output of the circuit for 2048 times
 	return counts
 
 counts = simulator(circuit, 2048)
 print('output:',counts)
+
+plot_histogram(counts)                         # Draws a Histogram with the results from the simulation
 
 ### Now why is the result 00 or 11 with equal probabilities i.e, 50:50
 ### We start with |0> --H--> (|0> + |1>)/(2)^0.5, i.e. a measurement has equal probability to be a |0> or |1>, i.e. 50:50
