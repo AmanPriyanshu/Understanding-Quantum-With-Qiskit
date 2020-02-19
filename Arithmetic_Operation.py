@@ -113,25 +113,102 @@ def half_adder(circuit, i, a, b, g, k):
 	circuit.cx(a[i],b[i])
 	return circuit
 
-def or_gate()
+def or_gate(circuit, i, j, a, b, o):
+	circuit.x(a[i])
+	circuit.x(b[j])
+	circuit.ccx(a[i], b[j], o[i//2])
+	circuit.x(o[i//2])
+	return circuit
 
-def addition_of_two_4_byte(a_in, b_in):
-	n = 3
+def unit_full_adder(a_in, b_in, c_in):
+	q = QuantumRegister(5)
+	c = ClassicalRegister(2)
+	circuit = QuantumCircuit(q,c)
+	if a_in == '1':
+		circuit.x(q[0])		#Flip the qubit from 0 to 1
+	if b_in == '1':
+		circuit.x(q[1])		#Flip the qubit from 0 to 1
+	if c_in == '1':
+		circuit.x(q[2])		#Flip the qubit from 0 to 1
+	circuit.cx(q[0],q[3])
+	circuit.cx(q[1],q[3])
+	circuit.cx(q[2],q[3])
+	circuit.ccx(q[0],q[1],q[4])
+	circuit.ccx(q[0],q[2],q[4])
+	circuit.ccx(q[1],q[2],q[4])
+	circuit.measure(q[3],c[0])
+	circuit.measure(q[4],c[1])
+	counts = simulator(circuit, 2048)
+	print('output:',counts)
+	print(circuit_drawer(circuit))
+
+[print() for i in range(5)]
+unit_full_adder('0', '0', '0')
+unit_full_adder('1', '0', '0')
+unit_full_adder('0', '1', '0')
+unit_full_adder('0', '0', '1')
+unit_full_adder('1', '1', '0')
+unit_full_adder('0', '1', '1')
+unit_full_adder('1', '0', '1')
+unit_full_adder('1', '1', '1')
+
+
+def addition_of_two_4_byte(a_in, b_in, n):
+	a_in = a_in[::-1]
+	b_in = b_in[::-1]
+	
 	a = QuantumRegister(n)
 	b = QuantumRegister(n)
-	c = QuantumRegister(n)
-	g = QuantumRegister(n*2)
-	out = ClassicalRegister(n+1)
-	circuit = QuantumCircuit(a, b, c, g, out)
+	c = QuantumRegister(n+1)
+	s = QuantumRegister(n)
+	out = ClassicalRegister(n)
+	out_c = ClassicalRegister(1)
+	circuit = QuantumCircuit(a, b, c, s, out, out_c)
+
 	for i in range(n):
-		if a_in[i] == 1:
+		if a_in[i] == '1':
 			circuit.x(a[i])		#Flip the qubit from 0 to 1
 	for i in range(n):
-		if b_in[i] == 1:
+		if b_in[i] == '1':
 			circuit.x(b[i])		#Flip the qubit from 0 to 1
 
 	for i in range(n):
-		circuit = half_adder(circuit, i, a, b, g, 2*i)
-		circuit = half_adder(circuit, i, b, c, g, 2*i+1)
+		circuit.cx(a[i],s[i])
+		circuit.cx(b[i],s[i])
+		circuit.cx(c[i],s[i])
+		circuit.ccx(a[i],b[i],c[i+1])
+		circuit.ccx(a[i],c[i],c[i+1])
+		circuit.ccx(b[i],c[i],c[i+1])
+
+	circuit.measure(s, out)
+	circuit.measure(c[i+1], out_c)
+	counts = simulator(circuit, 2048)
+	print('output:',counts)
+	print(circuit_drawer(circuit))
+
+[print() for i in range(5)]
+print("000, 000 = 0 000")
+addition_of_two_4_byte('000','000', 3)
+print("000, 001 = 0 001")
+addition_of_two_4_byte('000','001', 3)
+print("001, 000 = 0 001")
+addition_of_two_4_byte('001','000', 3)
+print("000, 010 = 0 010")
+addition_of_two_4_byte('000','010', 3)
+print("010, 000 = 0 010")
+addition_of_two_4_byte('010','000', 3)
+print("100, 100 = 1 000")
+addition_of_two_4_byte('100','100', 3)
+print("111, 110 = 1 101")
+addition_of_two_4_byte('111','110', 3)
+print("111, 101 = 1 100")
+addition_of_two_4_byte('111','101', 3)
+
+[print() for i in range(5)]
+print("(6 = 1100) + (6 = 1010)")
+addition_of_two_4_byte('1100', '1010', 4)
+
+
+
 
 
