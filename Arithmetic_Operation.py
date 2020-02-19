@@ -207,8 +207,3 @@ addition_of_two_4_byte('111','101', 3)
 [print() for i in range(5)]
 print("(6 = 1100) + (6 = 1010)")
 addition_of_two_4_byte('1100', '1010', 4)
-
-
-
-
-
