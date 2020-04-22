@@ -19,3 +19,6 @@ Here I introduce the basic outline of Implementing, Drawing and Simulating a sim
 
 ## Circuit 1: 
 Introducing bock visulazation and unitary (matrix) representation. Take a look at the code here: https://github.com/AmanPriyanshu/Understanding-Quantum-With-Qiskit/blob/master/Circuits/Qiskit_circuit_1.ipynb
+
+## Circuit 2: 
+Implementing a Quantum Teleportation Algorithm as well as understanding nature of a few Gates. Take a look at the code here: https://github.com/AmanPriyanshu/Understanding-Quantum-With-Qiskit/blob/master/Circuits/Qiskit_circuit_2.ipynb
