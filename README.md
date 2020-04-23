@@ -5,15 +5,8 @@ Qiskit: <https://github.com/Qiskit/qiskit>
 ## Installation
 Can be followed according to: <https://github.com/Qiskit/qiskit#installation>
 
-## Imports:
-```python
- import numpy as np
- from qiskit import(
-  QuantumCircuit,
-  execute,
-  Aer)
- from qiskit.visualization import plot_histogram
-```
+
+Checout my Quantum Circuits in the Circuits Directory (https://github.com/AmanPriyanshu/Understanding-Quantum-With-Qiskit/blob/master/Circuits). It details what I have learnt and my implementation for most of it. I have followed the Qiskit Tutorials for these Circuits, however some changes and developments have been made in some of them, for Future Reference and better Understanding.
 ## Circuit 0: 
 Here I introduce the basic outline of Implementing, Drawing and Simulating a simple Quantum Circuit in Qiskit. Take a look at the code here: https://github.com/AmanPriyanshu/Understanding-Quantum-With-Qiskit/blob/master/Circuits/Qiskit_circuit_0.ipynb
 
