@@ -15,3 +15,6 @@ Introducing bock visulazation and unitary (matrix) representation. Take a look a
 
 ## Circuit 2: 
 Implementing a Quantum Teleportation Algorithm as well as understanding nature of a few Gates. Take a look at the code here: https://github.com/AmanPriyanshu/Understanding-Quantum-With-Qiskit/blob/master/Circuits/Qiskit_circuit_2.ipynb
+
+## Circuit 3: 
+Implementing the Bernstein-Vazirani Algorithm as well as understanding the nature behind it. Take a look at the code here: https://github.com/AmanPriyanshu/Understanding-Quantum-With-Qiskit/blob/master/Circuits/Qiskit_circuit_3.ipynb
